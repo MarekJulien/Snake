@@ -4,6 +4,7 @@ int boardWidth = 800;
 int boardHeight = 800;
 int square_size = 40;
 
+FileManager fileMan;
 int score;
 int highScore;
 
@@ -15,6 +16,9 @@ void setup() {
     snake = new Snake(boardWidth / square_size, boardHeight / square_size);
     frameRate(8);
     xOffset = (width - boardWidth) / 2;
+    
+    fileMan = new FileManager();
+    highScore = fileMan.getHighScore();
 
 }
 
@@ -48,11 +52,11 @@ void draw() {
     for (int i = 0; i < bodys.length; i++) {
 
         Body cb = bodys[i];
-        fill(0, 230, 0);
+        fill(bodys[i].getBodyColor());
         rect(cb.xPos * square_size + xOffset, cb.yPos * square_size, square_size, square_size);
     }
     // DrawSnake Head
-    fill(0, 180, 0);
+    fill(this.snake.getSkin().getHeadColor());
     rect(snake.getXPos() * square_size + xOffset, snake.getYPos() * square_size, square_size, square_size);
 
     // Draw GameOver
@@ -67,13 +71,14 @@ void draw() {
     // Update Score
     score = snake.getBodys().length;
     if(score > highScore) {
-        highScore = score;   
+        highScore = score;
+        fileMan.saveHighScore(highScore);
     }
     
     // Draw Score
     stroke(255, 255, 255);
     fill(255, 255, 255);
-    textSize(xOffset / 6);
+    textSize(xOffset / 8);
     textAlign(CENTER, CENTER);
     noFill();
     text("Score: " + score, boardWidth + xOffset, 0, xOffset, 100);

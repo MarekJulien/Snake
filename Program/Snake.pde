@@ -5,6 +5,7 @@ class Snake {
     private int maxX;
     private int maxY;
     private Body[] bodys;
+    private SnakeSkin skin;
     private int ateApples;
     private String direction;
     private String nextDirection;
@@ -18,6 +19,7 @@ class Snake {
         this.maxX = boardWidth - 1;
         this.maxY = boardHeight - 1;
         this.bodys = new Body[0];
+        this.skin = new SnakeSkin(0, 200, 0, 50, 250, 50);
         this.ateApples = 0;
         this.direction = "R";
         this.nextDirection = this.direction;
@@ -38,9 +40,9 @@ class Snake {
             Body currentLastBody = null;
             if (this.bodys.length > 0) {
                 Body b = this.bodys[this.bodys.length-1];
-                currentLastBody = new Body(b.getXPos(), b.getYPos());
+                currentLastBody = new Body(b.getXPos(), b.getYPos(), this.skin.getBodyColor());
             } else {
-                currentLastBody = new Body(this.xPos, this.yPos);
+                currentLastBody = new Body(this.xPos, this.yPos, this.skin.getBodyColor());
             }
             newLastBody = currentLastBody;
         }
@@ -169,6 +171,10 @@ class Snake {
     public Body[] getBodys() {
 
         return this.bodys;
+    }
+    
+    public SnakeSkin getSkin() {
+        return this.skin;
     }
     
     public boolean isBlockOnSnake(int x, int y) {
