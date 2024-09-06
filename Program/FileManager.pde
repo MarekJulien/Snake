@@ -7,9 +7,17 @@ class FileManager {
         String line = null;
         int highScore = 0;
         try {
-            line = reader.readLine();
-            reader.close();
-            highScore = int(line);
+            if (reader == null) {
+                // Create data file
+                PrintWriter output = createWriter("data.txt");
+                output.println("0");
+                output.flush();
+                output.close();
+            } else {
+                line = reader.readLine();
+                reader.close();
+                highScore = int(line);
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
