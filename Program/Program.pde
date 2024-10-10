@@ -33,7 +33,7 @@ void draw() {
     background(0);
 
     // Grid
-    stroke(200, 200, 200);
+    stroke(30, 30, 30);
     for (int x = 0; x <= boardWidth; x += square_size) {
         line(x + xOffset, 0, x + xOffset, boardHeight);
     }
@@ -76,8 +76,8 @@ void draw() {
     }
     
     // Draw Score
-    stroke(255, 255, 255);
-    fill(255, 255, 255);
+    stroke(30, 30, 30);
+    fill(150, 150, 150);
     textSize(xOffset / 8);
     textAlign(CENTER, CENTER);
     noFill();
